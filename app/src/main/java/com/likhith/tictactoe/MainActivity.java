@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.inputmethodservice.Keyboard;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,18 +64,22 @@ public class MainActivity extends AppCompatActivity {
                 if(cstate[wp[0]]==cstate[wp[1]] && cstate[wp[1]]==cstate[wp[2]] &&cstate[wp[0]]!=2)
                 {
                     gameisactive=false;
-                    String winner="hi";
+                    String winner="";
 
                     if(cstate[wp[0]]==0)
                     {
                         winner=p1name;
-                        Log.i("pass",winner);
                     }
                     else if(cstate[wp[0]]==1)
                     {
                         winner=p2name;
                     }
-
+                    VideoView winnervideo=findViewById(R.id.winnervideo);
+                    String uriPath = "android.resource://"+getPackageName()+"/"+R.raw.winner;
+                    Uri uri = Uri.parse(uriPath);
+                    winnervideo.setVideoURI(uri);
+                    winnervideo.requestFocus();
+                    winnervideo.start();
                     TextView winnertext=findViewById(R.id.winnertext);
                     winnertext.setText(winner +" has won!");
                     final LinearLayout layout=findViewById(R.id.popup);
@@ -133,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
     {
         p1n =findViewById(R.id.p1n);
         p1name=p1n.getText().toString();
-        Log.i("p1name",p1name);
         p2n =findViewById(R.id.p2n);
         p2name=p2n.getText().toString();
         closekeyboard();
