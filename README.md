@@ -1,2 +1,2 @@
 # Tic-Tac-Toe
- Tic-Tac-Toe developed in android studio
+ Tic-Tac-Toe game developed in android studio
